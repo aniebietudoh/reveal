@@ -27,4 +27,7 @@ def create_app(test_config=None):
     def hello():
         return 'Hello! from RevealTheWeb'
 
+    from . import database
+    database.init_app(app)
+
     return app
