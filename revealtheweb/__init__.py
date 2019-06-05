@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-def creat_app(test_config=None):
+def create_app(test_config=None):
     # create and configure the application
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -23,7 +23,8 @@ def creat_app(test_config=None):
         pass
 
     # a hello route for testing
+    @app.route('/hello')
     def hello():
-        return 'Hello! revealtheweb'
+        return 'Hello! from RevealTheWeb'
 
     return app
