@@ -6,7 +6,7 @@ def create_app(test_config=None):
     # create and configure the application
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
-        SECRETE_KEY='dev',
+        SECRET_KEY='programmername12345',
         DATABASE=os.path.join(app.instance_path, 'revealtheweb.sqlite'),
     )
 
@@ -22,15 +22,14 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a hello route for testing
-    @app.route('/hello')
-    def hello():
-        return 'Hello! from RevealTheWeb'
-
     from . import database
     database.init_app(app)
 
     from . import auth
     app.register_blueprint(auth.bp)
+
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app
